@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusiKales Pro - Sistema Académico</title>
+    <!-- Iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Fondo Animado -->
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Contenedor de Notificaciones -->
+    <div id="toast-container"></div>
+
+    <!-- VISTA: LOGIN -->
+    <section id="view-login" class="view active">
+        <div class="glass-card login-card">
+            <div class="logo-area">
+                <i class="fas fa-music"></i>
+                <h1>MusiKales Pro</h1>
+                <p>Sistema Académico</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Usuario (Cédula)" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn-primary">Ingresar</button>
+            </form>
+            <div class="theme-toggle">
+                <button id="theme-btn"><i class="fas fa-moon"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISTA: DASHBOARD (Compartido con Sidebar) -->
+    <section id="view-dashboard" class="view hidden">
+        <aside class="sidebar glass-panel">
+            <div class="brand">
+                <i class="fas fa-music"></i> MusiKales
+            </div>
+            <nav id="nav-menu">
+                <!-- Se llena dinámicamente según el rol -->
+            </nav>
+            <div class="user-info">
+                <span id="user-name-display">Usuario</span>
+                <button id="logout-btn" class="btn-sm"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <header class="top-bar glass-panel">
+                <h2 id="page-title">Panel Principal</h2>
+                <div class="actions" id="header-actions"></div>
+            </header>
+
+            <div id="dynamic-content" class="fade-in">
+                <!-- El contenido se inyecta aquí vía JS -->
+            </div>
+        </main>
+    </section>
+
+    <!-- Scripts Modulares -->
+    <script src="js/db.js"></script>
+    <script src="js/logic.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
