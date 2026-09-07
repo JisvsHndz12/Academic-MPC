@@ -1,6 +1,4 @@
-import { getAll, addRecord, updateRecord, getByKey } from './db.js';
-
-export const calculateFinalGrade = async (enrollmentId) => {
+function calculateFinalGrade(enrollmentId) {
     // 1. Obtener Asistencia (16 semanas)
     // Asumimos estructura: attendance { enrollmentId, week (1-16), present (bool) }
     // En un caso real, filtraríamos por enrollmentId. Aquí simulamos el cálculo.
@@ -20,7 +18,7 @@ export const calculateFinalGrade = async (enrollmentId) => {
 
 // Regla: Nota Final = 80% Rúbrica + 20% Teórica
 // Rúbrica = 10% Asistencia + 90% Objetivos
-export const processEvaluation = (attendanceCount, rubricObjectivesAvg, theoryScore, subjectMinPass) => {
+function processEvaluation(attendanceCount, rubricObjectivesAvg, theoryScore, subjectMinPass) {
     // 1. Calcular nota de asistencia (Escala 1-10)
     // 16 clases = 10 puntos. Regla de 3 simple.
     const attendanceScore = (attendanceCount / 16) * 10;
@@ -57,7 +55,7 @@ export const processEvaluation = (attendanceCount, rubricObjectivesAvg, theorySc
 };
 
 // Helper para evaluar objetivos cualitativos
-export const evaluateObjective = (level) => {
+function evaluateObjective(level) {
     switch(level) {
         case 'logrado': return 9.5; // Promedio 9-10
         case 'proceso': return 7.0; // Promedio 6-8

@@ -1,33 +1,72 @@
-import { getByKey } from './db.js';
+// js/auth.js
 
-export const login = async (username, password) => {
+let currentUser = null;
+
+async function handleLogin(e) {
+    e.preventDefault();
+
+    const usernameInput = document.getElementById('username').value.trim();
+    const passwordInput = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('login-error');
+    const btn = document.getElementById('btn-login');
+
+    // UI Feedback
+    errorMsg.classList.add('hidden');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Validando...';
+    btn.disabled = true;
+
     try {
-        const user = await getByKey('users', username);
-        if (user && user.pass === password) {
-            sessionStorage.setItem('currentUser', JSON.stringify(user));
-            return { success: true, user };
-        }
-        return { success: false, message: 'Credenciales inválidas' };
+        // Esperamos a que la DB esté lista y valide
+        const user = await loginUser(usernameInput, passwordInput);
+
+        // Éxito
+        currentUser = user;
+        sessionStorage.setItem('musikales_user', JSON.stringify(user));
+
+        // Transición suave
+        setTimeout(() => {
+            switchView('dashboard-view');
+            loadDashboardContent(user);
+        }, 500);
+
     } catch (error) {
-        return { success: false, message: 'Error de conexión DB' };
+        console.error(error);
+        errorMsg.textContent = error === 'Credenciales inválidas'
+            ? 'Usuario o contraseña incorrectos'
+            : 'Error de conexión. Recargue la página.';
+        errorMsg.classList.remove('hidden');
+
+        // Reset botón
+        btn.innerHTML = '<span>Ingresar</span><i class="fas fa-arrow-right"></i>';
+        btn.disabled = false;
     }
-};
+}
 
-export const logout = () => {
-    sessionStorage.removeItem('currentUser');
-    window.location.reload();
-};
+function logout() {
+    currentUser = null;
+    sessionStorage.removeItem('musikales_user');
+    document.getElementById('login-form').reset();
+    switchView('login-view');
+}
 
-export const getCurrentUser = () => {
-    const user = sessionStorage.getItem('currentUser');
-    return user ? JSON.parse(user) : null;
-};
-
-export const checkRole = (allowedRoles) => {
-    const user = getCurrentUser();
-    if (!user || !allowedRoles.includes(user.role)) {
-        alert('Acceso denegado');
-        return false;
+function checkSession() {
+    const stored = sessionStorage.getItem('musikales_user');
+    if (stored) {
+        currentUser = JSON.parse(stored);
+        switchView('dashboard-view');
+        loadDashboardContent(currentUser);
+        return true;
     }
-    return true;
-};
+    return false;
+}
+
+function switchView(viewId) {
+    document.querySelectorAll('.view').forEach(el => {
+        el.classList.remove('active');
+        el.classList.add('hidden');
+    });
+    const target = document.getElementById(viewId);
+    target.classList.remove('hidden');
+    // Pequeño delay para permitir la transición CSS si se agrega
+    setTimeout(() => target.classList.add('active'), 10);
+}

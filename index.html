@@ -6,11 +6,9 @@
     <title>MusiKales Pro - Sistema Académico</title>
     <!-- Iconos -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Estilos -->
-    <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body class="dark-theme"> <!-- Default dark theme for glassmorphism -->
 
     <!-- Fondo Animado -->
     <div class="background-shapes">
@@ -19,60 +17,60 @@
         <div class="shape shape-3"></div>
     </div>
 
-    <!-- Contenedor de Notificaciones -->
-    <div id="toast-container"></div>
+    <!-- Contenedor Principal -->
+    <main id="app-container">
 
-    <!-- VISTA: LOGIN -->
-    <section id="view-login" class="view active">
-        <div class="glass-card login-card">
-            <div class="logo-area">
-                <i class="fas fa-music"></i>
-                <h1>MusiKales Pro</h1>
-                <p>Sistema Académico</p>
-            </div>
-            <form id="login-form">
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="username" placeholder="Usuario (Cédula)" required>
+        <!-- VISTA: LOGIN -->
+        <section id="login-view" class="view active">
+            <div class="glass-card login-card">
+                <div class="logo-area">
+                    <i class="fas fa-music"></i>
+                    <h1>MusiKales Pro</h1>
+                    <p>Academia de Música Profesional</p>
                 </div>
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" id="password" placeholder="Contraseña" required>
-                </div>
-                <button type="submit" class="btn-primary">Ingresar</button>
-            </form>
-            <div class="theme-toggle">
-                <button id="theme-btn"><i class="fas fa-moon"></i></button>
-            </div>
-        </div>
-    </section>
 
-    <!-- VISTA: DASHBOARD (Compartido con Sidebar) -->
-    <section id="view-dashboard" class="view hidden">
-        <aside class="sidebar glass-panel">
-            <div class="brand">
-                <i class="fas fa-music"></i> MusiKales
+                <form id="login-form">
+                    <div class="input-group">
+                        <label for="username"><i class="fas fa-user"></i> Usuario / Cédula</label>
+                        <input type="text" id="username" required placeholder="admin, docente1, estudiante1">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
+                        <input type="password" id="password" required placeholder="123">
+                    </div>
+
+                    <button type="submit" id="btn-login" class="btn-primary">
+                        <span>Ingresar</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+
+                    <div id="login-error" class="error-msg hidden"></div>
+
+                    <div class="demo-credentials">
+                        <small>Demo: admin/123, docente1/123, estudiante1/123</small>
+                    </div>
+                </form>
             </div>
-            <nav id="nav-menu">
-                <!-- Se llena dinámicamente según el rol -->
+        </section>
+
+        <!-- VISTA: DASHBOARD (Contenedor dinámico) -->
+        <section id="dashboard-view" class="view hidden">
+            <nav class="navbar glass-panel">
+                <div class="brand">MusiKales Pro</div>
+                <div class="user-info">
+                    <span id="user-display-name">Usuario</span>
+                    <span id="user-role-badge" class="badge">Role</span>
+                    <button id="btn-logout" class="btn-icon"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
             </nav>
-            <div class="user-info">
-                <span id="user-name-display">Usuario</span>
-                <button id="logout-btn" class="btn-sm"><i class="fas fa-sign-out-alt"></i></button>
-            </div>
-        </aside>
 
-        <main class="content-area">
-            <header class="top-bar glass-panel">
-                <h2 id="page-title">Panel Principal</h2>
-                <div class="actions" id="header-actions"></div>
-            </header>
-
-            <div id="dynamic-content" class="fade-in">
-                <!-- El contenido se inyecta aquí vía JS -->
+            <div class="dashboard-content" id="dashboard-content">
+                <!-- El contenido se inyecta vía JS según el rol -->
             </div>
-        </main>
-    </section>
+        </section>
+
+    </main>
 
     <!-- Scripts Modulares -->
     <script src="js/db.js"></script>
