@@ -3,18 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#8b5cf6" />
+  <meta name="description" content="Sistema Académico MusiKales Pro - Músico Profesional por Competencias" />
+  
+  <!-- PWA Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="MusiKales" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  
   <title>MusiKales Pro — Sistema Académico</title>
+  
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="./manifest.json" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/MusiKalesProLogoRojo.png" />
+  <link rel="apple-touch-icon" href="./assets/MusiKalesProLogoRojo.png" />
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
   <!-- ============ PANTALLA DE LOGIN ============ -->
   <section id="login-screen" class="screen active">
     <div class="login-bg"></div>
     <div class="login-container glass">
       <header class="login-header">
-        <div class="logo">🎵</div>
+        <!-- 🔑 LOGO EN LOGIN -->
+        <img src="assets/MusiKalesProLogoRojo.png" alt="MusiKales Pro" class="login-logo" />
         <h1>MusiKales <span>Pro</span></h1>
         <p class="subtitle">Músico Profesional por Competencias</p>
       </header>
@@ -52,13 +71,12 @@
 
   <!-- ============ APP PRINCIPAL ============ -->
   <section id="app-screen" class="screen">
-
-    <!-- OVERLAY (clic para cerrar en móvil) -->
     <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
     <aside id="sidebar" class="sidebar glass">
       <div class="sidebar-header">
-        <div class="logo-sm">🎵</div>
+        <!-- 🔑 LOGO EN SIDEBAR -->
+        <img src="assets/MusiKalesProLogoRojo.png" alt="MusiKales Pro" class="sidebar-logo" />
         <div class="header-text">
           <h2>MusiKales Pro</h2>
           <span id="sidebar-role" class="role-badge"></span>
@@ -102,6 +120,16 @@
   <!-- ============ TOAST ============ -->
   <div id="toast-root" class="toast-root"></div>
 
+  <!-- ============ SCRIPTS ============ -->
+  <script src="js/db.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/master.js"></script>
+  <script src="js/docente.js"></script>
+  <script src="js/estudiante.js"></script>
+  <script src="js/app.js"></script>
   <!-- ============ SCRIPTS (orden importa) ============ -->
   <script src="js/db.js"></script>
   <script src="js/utils.js"></script>
@@ -112,6 +140,20 @@
   <script src="js/docente.js"></script>
   <script src="js/estudiante.js"></script>
   <script src="js/app.js"></script>
-  <script src="js/data-io.js"></script>
+  
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then((registration) => {
+            console.log('[PWA] Service Worker registrado:', registration.scope);
+          })
+          .catch((error) => {
+            console.error('[PWA] Error al registrar Service Worker:', error);
+          });
+      });
+    }
+  </script>
 </body>
 </html>

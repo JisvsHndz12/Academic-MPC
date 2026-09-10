@@ -198,3 +198,47 @@ body {
 }
 .view-title { margin: 0; font-size: 18px; font-weight: 600; flex: 1; }
 .view-container { padding: 22px; }
+
+/* ============ LOGO ============ */
+.login-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 12px;
+  display: block;
+  border-radius: 18px;
+  object-fit: contain;
+  /* 🔑 Filtro para tema oscuro: hacer el logo más visible */
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+.sidebar-logo {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 12px;
+  object-fit: contain;
+  /* 🔑 Filtro para tema oscuro */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* 🔑 Ajustes para sidebar colapsado */
+#app-screen.sidebar-collapsed .sidebar-logo {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+}
+
+/*  Tema claro: ajustar filtros */
+[data-theme="light"] .login-logo,
+[data-theme="light"] .sidebar-logo {
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+/* ============ RESPONSIVE LOGO ============ */
+@media (max-width: 960px) {
+  .sidebar-logo {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+  }
+}
