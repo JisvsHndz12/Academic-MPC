@@ -1,0 +1,383 @@
+/* ============ DASHBOARD ESTUDIANTE ============ */
+.est-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(139,92,246,.15), rgba(34,211,238,.1));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+}
+.est-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  display: grid; place-items: center;
+  font-size: 32px; font-weight: 800; color: #fff;
+}
+.est-info h2 { margin: 0 0 4px; font-size: 22px; }
+.est-info .meta { color: var(--text-2); font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* Stats cards */
+.est-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.est-stat {
+  padding: 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+.est-stat .label { font-size: 11px; color: var(--text-2); text-transform: uppercase; letter-spacing: .5px; }
+.est-stat .value { font-size: 28px; font-weight: 800; margin-top: 4px; }
+.est-stat .value.good { color: var(--success); }
+.est-stat .value.warn { color: var(--warning); }
+.est-stat .value.bad { color: var(--danger); }
+.est-stat .value.primary { color: var(--primary); }
+
+/* Gráfico de barras */
+.chart-card {
+  padding: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: 20px;
+}
+.chart-card h3 { margin: 0 0 16px; font-size: 16px; }
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 180px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--glass-border);
+  overflow-x: auto;
+}
+.bar-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 40px;
+}
+.bar {
+  width: 100%;
+  max-width: 40px;
+  background: linear-gradient(180deg, var(--primary), var(--accent));
+  border-radius: 6px 6px 0 0;
+  transition: height .5s ease;
+  position: relative;
+  min-height: 4px;
+}
+.bar.aprobado { background: linear-gradient(180deg, var(--success), #059669); }
+.bar.reprobado { background: linear-gradient(180deg, var(--danger), #b91c1c); }
+.bar-value {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.bar-label {
+  font-size: 10px;
+  color: var(--text-2);
+  text-align: center;
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Timeline semestral */
+.timeline {
+  display: grid;
+  gap: 16px;
+}
+.semestre-block {
+  padding: 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+.semestre-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.semestre-header h4 { margin: 0; font-size: 15px; }
+.semestre-header .periodo {
+  padding: 4px 10px;
+  background: rgba(139,92,246,.15);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--primary);
+}
+.materia-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 13px;
+}
+.materia-row:last-child { border-bottom: 0; }
+.materia-row .codigo { font-weight: 600; color: var(--primary); font-size: 11px; display: block; }
+.materia-row .nota { font-weight: 700; font-size: 15px; }
+.materia-row .nota.aprobado { color: var(--success); }
+.materia-row .nota.reprobado { color: var(--danger); }
+.materia-row .nota.pendiente { color: var(--text-2); }
+
+/* Tabs estudiante */
+.est-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--glass-border);
+  overflow-x: auto;
+}
+.est-tab {
+  padding: 10px 18px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: var(--text-2);
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.est-tab:hover { color: var(--text-0); }
+.est-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+/* Detalle materia */
+.detalle-materia {
+  padding: 20px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+}
+.desglose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.desglose-item {
+  padding: 14px;
+  background: rgba(139,92,246,.08);
+  border-radius: var(--radius-md);
+}
+.desglose-item .label { font-size: 11px; color: var(--text-2); text-transform: uppercase; }
+.desglose-item .value { font-size: 20px; font-weight: 700; margin-top: 4px; }
+
+/* Objetivo detalle */
+.objetivo-detail {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 13px;
+}
+.objetivo-detail:last-child { border-bottom: 0; }
+
+/* ============================================================
+ *  FIX: TABLA "MIS MATERIAS" — CONTENIDA Y RESPONSIVE
+ * ============================================================ */
+
+/* Contenedor principal de la tabla: siempre contenido */
+.est-materias-wrap {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Scroll horizontal controlado */
+.est-materias-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Tabla: ancho mínimo pero dentro del scroll */
+.est-materias-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.est-materias-table th,
+.est-materias-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--glass-border);
+  white-space: nowrap;
+}
+.est-materias-table th {
+  color: var(--text-2);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  background: rgba(139,92,246,.06);
+  position: sticky;
+  top: 0;
+}
+.est-materias-table tbody tr:hover {
+  background: rgba(139,92,246,.06);
+}
+.est-materias-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Columna materia: permite wrap */
+.est-materias-table .col-materia {
+  white-space: normal;
+  min-width: 180px;
+  max-width: 260px;
+}
+.est-materias-table .col-materia .codigo {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 11px;
+  display: block;
+  margin-bottom: 2px;
+}
+.est-materias-table .col-materia .nombre {
+  font-size: 13px;
+  line-height: 1.3;
+}
+
+/* Columnas numéricas centradas */
+.est-materias-table .col-num {
+  text-align: center;
+  min-width: 70px;
+}
+
+/* Columna nota final destacada */
+.est-materias-table .col-final {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 800;
+  min-width: 80px;
+}
+
+/* Indicador de scroll */
+.est-scroll-hint {
+  display: none;
+  text-align: center;
+  padding: 8px;
+  font-size: 11px;
+  color: var(--text-2);
+  background: rgba(139,92,246,.05);
+  border-top: 1px solid var(--glass-border);
+}
+
+/* ============ MOBILE: TABLA COMO CARDS ============ */
+@media (max-width: 768px) {
+  .est-header { grid-template-columns: 1fr; text-align: center; }
+  .est-avatar { margin: 0 auto; }
+  .est-info .meta { justify-content: center; }
+
+  .est-materias-table {
+    min-width: unset;
+    width: 100%;
+  }
+  .est-materias-table thead { display: none; }
+  .est-materias-table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    padding: 14px;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .est-materias-table tbody tr:last-child { border-bottom: 0; }
+  .est-materias-table td {
+    padding: 4px 0;
+    border-bottom: 0;
+    white-space: normal;
+  }
+  .est-materias-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 10px;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+  .est-materias-table .col-materia {
+    grid-column: 1 / -1;
+    min-width: unset;
+    max-width: unset;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 4px;
+  }
+  .est-materias-table .col-materia::before { display: none; }
+  .est-materias-table .col-final {
+    grid-column: 1 / -1;
+    text-align: left;
+    padding-top: 8px;
+    border-top: 1px solid var(--glass-border);
+    margin-top: 4px;
+  }
+  .est-materias-table .col-num { text-align: left; min-width: unset; }
+
+  .materia-row { grid-template-columns: 1fr auto; }
+
+  .est-scroll-hint { display: none; }
+}
+
+/* Tablet: mostrar hint de scroll */
+@media (min-width: 769px) and (max-width: 960px) {
+  .est-scroll-hint { display: block; }
+}
+/* ============ MENCIÓN DESTACADA EN HEADER ============ */
+.mencion-destacada {
+  margin-top: 10px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.mencion-destacada.cum {
+  background: linear-gradient(135deg, rgba(205, 127, 50, 0.25), rgba(205, 127, 50, 0.1));
+  color: #cd7f32;
+  border: 1px solid rgba(205, 127, 50, 0.5);
+}
+
+.mencion-destacada.magna {
+  background: linear-gradient(135deg, rgba(192, 192, 192, 0.25), rgba(192, 192, 192, 0.1));
+  color: #a0a0a0;
+  border: 1px solid rgba(192, 192, 192, 0.5);
+}
+
+.mencion-destacada.summa {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 215, 0, 0.1));
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.6);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+[data-theme="light"] .mencion-destacada.cum { color: #8b5a2b; }
+[data-theme="light"] .mencion-destacada.magna { color: #6b6b6b; }
+[data-theme="light"] .mencion-destacada.summa { color: #b8860b; }

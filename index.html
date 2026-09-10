@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MusiKales Pro — Sistema Académico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- ============ PANTALLA DE LOGIN ============ -->
+  <section id="login-screen" class="screen active">
+    <div class="login-bg"></div>
+    <div class="login-container glass">
+      <header class="login-header">
+        <div class="logo">🎵</div>
+        <h1>MusiKales <span>Pro</span></h1>
+        <p class="subtitle">Músico Profesional por Competencias</p>
+      </header>
+
+      <form id="login-form" class="login-form" autocomplete="off">
+        <div class="field">
+          <label for="login-user">Usuario</label>
+          <input type="text" id="login-user" required placeholder="Ingrese su usuario" />
+        </div>
+        <div class="field">
+          <label for="login-pass">Contraseña</label>
+          <input type="password" id="login-pass" required placeholder="••••••••" />
+        </div>
+        <div class="field">
+          <label for="login-role">Rol</label>
+          <select id="login-role" required>
+            <option value="">Seleccione un rol</option>
+            <option value="master">Master / Administrativo</option>
+            <option value="docente">Docente</option>
+            <option value="estudiante">Estudiante</option>
+          </select>
+        </div>
+        <div id="login-error" class="error-msg" hidden></div>
+        <button type="submit" class="btn btn-primary btn-block">Ingresar al Sistema</button>
+      </form>
+
+      <footer class="login-footer">
+        <button id="theme-toggle" class="icon-btn" aria-label="Cambiar tema">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <small>Academia MusiKales Pro © <span id="year"></span></small>
+      </footer>
+    </div>
+  </section>
+
+  <!-- ============ APP PRINCIPAL ============ -->
+  <section id="app-screen" class="screen">
+
+    <!-- OVERLAY (clic para cerrar en móvil) -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <aside id="sidebar" class="sidebar glass">
+      <div class="sidebar-header">
+        <div class="logo-sm">🎵</div>
+        <div class="header-text">
+          <h2>MusiKales Pro</h2>
+          <span id="sidebar-role" class="role-badge"></span>
+        </div>
+        <button id="sidebar-close" class="icon-btn sidebar-close-btn" aria-label="Cerrar menú">✕</button>
+      </div>
+      <nav id="sidebar-nav" class="sidebar-nav"></nav>
+      <div class="sidebar-footer">
+        <div id="user-info" class="user-info"></div>
+        <button id="logout-btn" class="btn btn-ghost btn-sm">Cerrar sesión</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar glass">
+        <button id="menu-toggle" class="icon-btn" aria-label="Menú">☰</button>
+        <button id="sidebar-collapse-btn" class="icon-btn" aria-label="Colapsar menú" style="display:none">◀</button>
+        <h2 id="view-title" class="view-title">Dashboard</h2>
+        <div class="spacer"></div>
+        <button id="topbar-theme-toggle" class="icon-btn" aria-label="Cambiar tema">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </header>
+      <div id="view-container" class="view-container"></div>
+    </main>
+  </section>
+
+  <!-- ============ MODAL GENÉRICO ============ -->
+  <div id="modal-root" class="modal-root" hidden>
+    <div class="modal-backdrop"></div>
+    <div class="modal glass" role="dialog" aria-modal="true">
+      <header class="modal-header">
+        <h3 id="modal-title"></h3>
+        <button class="icon-btn modal-close" aria-label="Cerrar">✕</button>
+      </header>
+      <div id="modal-body" class="modal-body"></div>
+      <footer id="modal-footer" class="modal-footer"></footer>
+    </div>
+  </div>
+
+  <!-- ============ TOAST ============ -->
+  <div id="toast-root" class="toast-root"></div>
+
+  <!-- ============ SCRIPTS (orden importa) ============ -->
+  <script src="js/db.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/master.js"></script>
+  <script src="js/docente.js"></script>
+  <script src="js/estudiante.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/data-io.js"></script>
+</body>
+</html>
